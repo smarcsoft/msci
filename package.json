@@ -1,0 +1,19 @@
+{
+  "name": "msci",
+  "version": "1.0.0",
+  "description": "MSCI App",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smarcsoft/msci.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smarcsoft/msci/issues"
+  },
+  "homepage": "https://github.com/smarcsoft/msci#readme"
+}
