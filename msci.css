@@ -1,6 +1,12 @@
+:root {
+--msci_darker_background: #101010;
+--msci_dark_background: #202020;
+}
+
 .msci 
 {
-    background-color:#101010;
+    background-color: var(--msci_darker_background);
+    font-family: Calibri;
     color: lightslategray;
 }
 
@@ -12,6 +18,16 @@
     text-align: center;
 }
 
+/*search box*/
+.search {
+  display: grid;
+  grid-template-columns: min-content min-content;
+}
+
+search_element {
+  grid-column: 1/1;
+  grid-row: 1;
+}
 
 /*autocomplete drop down box*/
 .autocomplete {
@@ -22,13 +38,16 @@
   .autocomplete_input{
     font-family: Calibri;
     font-size: 12pt;
-    background-color:#101010;
+    background-color: var(--msci_darker_background);
     color: lightslategray;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--msci_dark_background);
     width: 500px;
   }
   .autocomplete-items {
-    position: absolute;
-    border: 1px solid #101010;
+    position: static;
+    border: 1px solid var(--msci_darker_background);
     border-bottom: none;
     border-top: none;
     z-index: 99;
@@ -43,9 +62,9 @@
     font-size: 12pt;
     padding: 3px;
     cursor: pointer;
-    background-color: #202020; 
+    background-color:var(--msci_dark_background); 
     border-bottom: 1px;
-    border-color: #202020;
+    border-color:var(--msci_dark_background);
   }
   
   /*when hovering an item:*/
