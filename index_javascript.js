@@ -2,6 +2,7 @@ function populate_msci_indexes()
 {
     console.log("Calling index master MSCI API to get the list of indexes");
     var request = new XMLHttpRequest();
+    var toReturn = new Array();
   
     // Open a new connection, using the GET request on the URL endpoint
     request.open('GET', 'https://api.msci.com/index/indexmaster/description/v1.0/indexes/ALL?calc_date=20191122&as_of_date=20191122&distribution_zone=WORLD&cumulative=false', true);
@@ -9,14 +10,14 @@ function populate_msci_indexes()
 
     request.onload = function() 
     {
-        console.log("Parsing JSON back");
         var indexes = JSON.parse(this.response);
-        console.log(indexes);
         // Begin accessing JSON data here
         if (request.status == 200) {
-            index_array = Array.from(indexes.indexes);
+            var index_array = Array.from(indexes.indexes);
+            console.log(index_array.length + " indexes retrieved from MSCI");
             index_array.forEach(index_description => {
-              console.log(index_description.INDEX_MASTER_DESCRIPTION.msci_index_code + ":" + index_description.INDEX_MASTER_DESCRIPTION.index_name);
+              // toReturn.add(index_description.INDEX_MASTER_DESCRIPTION.msci_index_code);
+              toReturn.push(index_description.INDEX_MASTER_DESCRIPTION.msci_index_code + " - " + index_description.INDEX_MASTER_DESCRIPTION.index_name);
             })
           } else {
             console.log('error')
@@ -26,7 +27,7 @@ function populate_msci_indexes()
     // Send request
     request.send()
 
-    return ["MSCI World","MSCI France","MSCI EAFE"];
+    return toReturn;
 }
 
 function populate_msci_entities()
