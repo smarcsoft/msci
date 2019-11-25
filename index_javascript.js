@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 function populate_msci_indexes()
 {
     console.log("Calling index master MSCI API to get the list of indexes");
@@ -30,9 +32,28 @@ function populate_msci_indexes()
     return toReturn;
 }
 
+function populate_msci_indexes_from_cache()
+{
+    try {
+          var toReturn = [];
+          const jsonString = fs.readFileSync('./cache/indexes.json');
+          const cache_object = JSON.parse(jsonString);
+          var index_array = Array.from(cache_object);
+          console.log(index_array.length + " indexes retrieved from cache");
+          index_array.forEach(index_description => {
+          // toReturn.add(index_description.INDEX_MASTER_DESCRIPTION.msci_index_code);
+          toReturn.push(index_description.index_code + " - " + index_description.index_name);
+          });
+        } catch(err) {
+        console.log(err)
+        return
+      }
+    return toReturn;
+}
+
 function populate_msci_entities()
 {
-    return populate_msci_indexes();
+    return populate_msci_indexes_from_cache();
 }
 
 autocomplete(document.getElementById("EntityCode"), populate_msci_entities());
